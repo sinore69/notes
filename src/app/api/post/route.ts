@@ -9,5 +9,5 @@ export async function POST(request:NextRequest) {
     }).catch(err=>{
         console.log(err)
     });
-    return  NextResponse.json('success');
+    return  NextResponse.json({status:200});
 }

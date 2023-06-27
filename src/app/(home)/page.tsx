@@ -8,15 +8,16 @@ interface task{
 
 export  default  function Home() {
 
-  async function del(id:any,post:any) {
+  async function del(id:any) {
      await axios({
       method: 'delete',
-      url: `/api/delete/${post}`,
+      url: `/api/delete/${id}`,
      }).then(res=>{console.log(res)})
      .catch(err=>{console.log(err)});
+     refetch();
     }
 
-  const {data,}=useQuery({
+  const {data,refetch}=useQuery({
     queryKey: ['get'],
     queryFn: async ()=>{
       const {data}=await axios.get('/api/get')
@@ -32,6 +33,7 @@ export  default  function Home() {
     }
     ).then(res=>{console.log(res)})
     .catch(err=>{console.log(err)});
+    refetch();
   }
   const[task,settask]=useState<task>({post:''})
 
@@ -47,7 +49,7 @@ export  default  function Home() {
       {data?.map((item:any)=>
       <div className="flex flex-row justify-between" key={item.id}>
       <li className="text-2xl font-bold">{item.post}</li>
-      <button type="submit" className="p-1 ml-10 " onClick={()=>del(item.id,item.post)}  >delete</button>
+      <button type="submit" className="p-1 ml-10 " onClick={()=>del(item.id)}  >delete</button>
       </div>
       )
       }
