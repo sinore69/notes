@@ -2,12 +2,15 @@
 import { useState } from "react"
 import axios from "axios"
 import {useQuery} from '@tanstack/react-query'
+import Link from "next/link"
+import { useRouter } from "next/navigation"
+
 interface task{
   post:string
 }
 
 export  default  function Home() {
-
+  
   async function del(id:any) {
      await axios({
       method: 'delete',
@@ -46,10 +49,14 @@ export  default  function Home() {
       <button type="submit" className="bg-blue-500 text-white p-1 rounded mt-10" onClick={()=>post()}>Add</button>
     </div>
     <div className="ml-2  0 mt-10 p-1">
-      {data?.map((item:any)=>
+      {
+      data?.map((item:any)=>
       <div className="flex flex-row justify-between" key={item.id}>
-      <li className="text-2xl font-bold">{item.post}</li>
-      <button type="submit" className="p-1 ml-10 " onClick={()=>del(item.id)}  >delete</button>
+        <li className="text-2xl font-bold">{item.post}</li>
+        <button type="submit" className="p-1 ml-10 " onClick={()=>del(item.id)}  >delete </button>
+        <Link href={{
+            pathname:`/edit/${item.id}`,
+          }} className="ml-5 p-1">edit</Link>
       </div>
       )
       }
