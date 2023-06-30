@@ -3,7 +3,7 @@ import { useState } from "react"
 import axios from "axios"
 import {useQuery} from '@tanstack/react-query'
 import Link from "next/link"
-import { useRouter } from "next/navigation"
+import { UserButton,auth } from "@clerk/nextjs"
 
 interface task{
   post:string
@@ -39,8 +39,8 @@ export  default  function Home() {
     refetch();
   }
   const[task,settask]=useState<task>({post:''})
-
   return (
+    <div className="relative h-screen">
   <div className="flex flex-row">
     <div className="ml-10 mt-10 ">
       <form>
@@ -61,6 +61,12 @@ export  default  function Home() {
       )
       }
     </div>
+    <div>
+    </div>
+  </div>
+  <div className="absolute top-5 right-5">
+    <UserButton afterSignOutUrl="/"/>
+  </div>
   </div>
   )
 }
