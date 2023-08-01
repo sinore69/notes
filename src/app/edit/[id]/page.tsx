@@ -12,7 +12,7 @@ async function edittask(id:any,task:string){
   console.log(id,task)
   await axios({
     method:'put',
-    url:`http://localhost:3000/api/edit`,
+    url:`http://localhost:3000/api/actions`,
     params:{
       id:id,
       task:task

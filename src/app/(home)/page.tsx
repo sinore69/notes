@@ -14,7 +14,7 @@ export  default  function Home() {
   async function del(id:any) {
      await axios({
       method: 'delete',
-      url: `/api/delete/${id}`,
+      url: `/api/actions/delete/${id}`,
      }).then(res=>{console.log(res)})
      .catch(err=>{console.log(err)});
      refetch();
@@ -23,7 +23,7 @@ export  default  function Home() {
   const {data,refetch}=useQuery({
     queryKey: ['get'],
     queryFn: async ()=>{
-      const {data}=await axios.get('/api/get')
+      const {data}=await axios.get('/api/actions')
       return data
     } ,
   })
@@ -31,7 +31,7 @@ export  default  function Home() {
   async function post(){
     await axios({
       method: 'post',
-      url: '/api/post',
+      url: '/api/actions',
       data: task
     }
     ).then(res=>{console.log(res)})
